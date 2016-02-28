@@ -35,12 +35,7 @@ module.exports = {
                 // TODO: THROW EXCEPTION
                 return null;
             }
-            
-            if (!args.callbackGiven()) {
-                // TODO: THROW EXCEPTION
-                return null;
-            }
-            
+                        
             // pull out all of our args
             this.name = args.first;
             this.tags = args.at(1) || [];
