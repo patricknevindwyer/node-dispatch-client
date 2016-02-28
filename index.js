@@ -37,12 +37,48 @@ module.exports = {
             }
                         
             // pull out all of our args
-            this.name = args.first;
-            this.tags = args.at(1) || [];
-            this.hostname = args.at(2);
-            this.port = args.at(3);
+            var nonCBargs = args.all;
             
-            var cb = args.callback;
+            this.name = nonCBargs[0];
+            this.tags = nonCBargs[1] || [];
+            this.hostname = nonCBargs[2];
+            this.port = nonCBargs[3];
+            
+            if (this.port === undefined) {
+                this.port = process.env.PORT || "3000";
+            }
+            
+            
+            
+            if (this.hostname === undefined) {
+                
+                var t = this;
+                var cb = args.callback;
+                
+                // find the real hostname/port
+                this.findHostname(
+                    function (err, hostname) {
+                        
+                        if (err) {
+                            console.info("[dispatch-client] Error resolving hostname: %s", err);
+                            cb(err);
+                        }
+                        else {
+                            console.info("[dispatch-client] Auto-discovered identity as [%s:%s]", hostname, t.port);
+                            t.hostname = hostname;
+                            t._register(cb);
+                        }
+                    }
+                )
+            }
+            else {
+                console.info("[dispatch-client] Identifying as [%s:%s]", this.hostname, this.port);
+                this._register(args.callback);    
+            }
+            
+        }
+        
+        _register(cb) {
             var t = this;
             
             request.put(
