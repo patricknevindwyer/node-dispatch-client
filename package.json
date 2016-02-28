@@ -1,0 +1,25 @@
+{
+  "name": "dispatch-client",
+  "version": "0.0.4",
+  "description": "A client library for interacting with Dispatch service discovery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'Error: no test specified' && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/patricknevindwyer/node-dispatch-client.git"
+  },
+  "keywords": [
+    "servicediscovery"
+  ],
+  "author": "Patrick Nevin Dwyer <patricknevindwyer@gmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/patricknevindwyer/node-dispatch-client/issues"
+  },
+  "dependencies": {
+    "request": "^2.69.0",
+    "vargs": "^0.1.0"
+  }
+}
